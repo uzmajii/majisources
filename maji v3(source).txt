@@ -1,0 +1,171 @@
+game.StarterGui:SetCore("SendNotification", {
+	Title = "Maji Hub";
+	Text = "Loaded!";
+        Icon = "rbxassetid://14402210286";
+	Duration = 5;
+})
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+local window = DrRayLibrary:Load("Maji Hub v3 | OP", "Default")
+
+local tab1 = DrRayLibrary.newTab("Silent", "ImageIdHere")
+
+tab1.newLabel("Silent")
+tab1.newButton("TBot", "", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/Cs5X9zH9'))()
+    end)
+
+tab1.newButton("NormalSilent", "", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/x5A9Jvqi'))()
+    end)
+
+tab1.newButton("NoJump", "", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/bgigL6pZ'))()
+    end)
+
+tab1.newButton("BounceBot", "", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/7PU7Sm4Z'))()
+    end)
+
+local tab2 = DrRayLibrary.newTab("LocalPlayer", "ImageIdLogoHere")
+
+tab2.newLabel("LocalPlayer")
+tab2.newButton("Ball Mag (R)", "self explanatory", function()
+    local UIS = game:GetService('UserInputService')
+        local plr = game.Players.LocalPlayer
+        local Char = plr.Character or plr.CharacterAded:Wait()
+        local Key = 'R'
+        UIS.InputBegan:Connect(function(Input, IsTyping)
+        if IsTyping then return end
+        local KeyPressed = Input.KeyCode
+        if KeyPressed == Enum.KeyCode[Key] then
+        game.Workspace.Map.Basketball.Handle.CFrame = Game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+        end)
+    end)
+
+tab2.newSlider("jump power", "Changes how high u jump", 1000, false, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+tab2.newSlider("walkspeed", "Changes ur walkspeed", 1000, false, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+tab2.newButton("resets WS/JP", "self explanatory", function()
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end)
+
+tab2.newButton("AutoGaurd (Z)", "self explanatory", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/BPmqd5G5'))()
+    end)
+
+tab2.newButton("Inf Jump", "self explanatory", function()
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+        if InfiniteJumpEnabled then
+            game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+        end
+        end)
+ 
+        end)
+
+local tab3 = DrRayLibrary.newTab("Other", "ImageIdLogoHere")
+
+tab3.newLabel("Other")
+tab3.newButton("RTX", "better graphics/ kb = P", function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/Cd76B8Lh'),true))()
+    end)
+
+tab3.newButton("Fling (Y)", "flings whoever has the ball and gives it to you", function()
+        -- made by tux & kron you skids
+-- keybind is y, fling whoever has the ball
+local Player = game:GetService("Players").LocalPlayer
+local UIS = game:GetService("UserInputService")
+
+local OldPosition = Vector3.zero
+local Toggled = false
+
+local GetTarget = function()
+    local Distance, Target = 9e9;
+    
+    for _, TempPlayer in next, game:GetService("Players"):GetPlayers() do
+        if TempPlayer ~= Player and TempPlayer.Character ~= nil and TempPlayer.Character:FindFirstChild("Basketball") ~= nil then
+            local Magnitude = (TempPlayer.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
+            
+            if Distance > Magnitude then
+                Distance = Magnitude
+                Target = TempPlayer
+            end
+        end
+    end
+    
+    return Target
+end
+
+local GetRoot = function()
+    return Player.Character:FindFirstChild("HumanoidRootPart", true)
+end
+
+UIS.InputBegan:Connect(function(Key, GPE)
+    if not GPE and Key.KeyCode == Enum.KeyCode.Y and not Toggled then
+        local RootPart = GetRoot()
+        
+        Toggled = true
+        
+        OldPosition = RootPart.Position
+        
+        while Toggled do
+            local Target = GetTarget()
+            
+            if Target ~= nil then
+                local Direction = (Target.Character.Basketball.Handle.Position - RootPart.Position).Unit * 100
+
+                RootPart.Velocity = Direction * 5
+            end
+            
+            task.wait()
+        end
+    end
+end)
+
+UIS.InputEnded:Connect(function(Key, GPE)
+    if not GPE and Key.KeyCode == Enum.KeyCode.Y then
+        local RootPart = GetRoot()
+        
+        Toggled = false
+        
+        Player.Character:MoveTo(OldPosition)
+        
+        for _ = 0, 10 do
+            RootPart.CFrame = CFrame.new(OldPosition)
+            RootPart.Velocity = Vector3.zero
+            task.wait(0.1)
+        end
+    end
+end)
+    end)
+
+local tab4 = DrRayLibrary.newTab("TP", "ImageIdLogoHere")
+
+tab4.newLabel("TP/Credits")
+tab4.newButton("RimTp1", "Tps you to a certain rim", function()
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9935493, 42.9078331, 143.324341, -1, 0, 0, 0, 1, 0, 0, 0, -1) 
+        end)
+
+tab4.newButton("RimTp2", "Tps you to a certain rim", function()
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9944324, 42.6078377, -46.1025467, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end)
+
+tab4.newButton("BallSpawn1", "Tps you to a BSpawn", function()
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9139996, 27.8899994, -32.2940369, -1.1920929e-07, -0, -1.00000012, 0, 1, -0, 1.00000012, 0, -1.1920929e-07)
+        end)
+
+tab4.newButton("BallSpawn2", "Tps you to a Bspawn", function()
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-17.0290585, 27.8799992, 128.626984, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
+        end)
+
+tab4.newLabel("Created/scripted by @uzmaji ( ͜ₒ ㅅ ͜ ₒ)")
+tab4.newLabel("BounceSilent: 6zyc")
+tab4.newLabel("NoJumpBot & TBot: M_gnet")
+tab4.newLabel("Fling: Beepers on YT")

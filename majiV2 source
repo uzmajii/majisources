@@ -1,0 +1,195 @@
+game.StarterGui:SetCore("SendNotification", {
+	Title = "Maji Hub";
+	Text = "Loaded!";
+        Icon = "rbxassetid://14402210286";
+	Duration = 5;
+})
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+  local Window = Library.CreateLib("Maji HUB V2 | OP", "BloodTheme")
+   
+
+    -- SILENT
+    local Silent = Window:NewTab("Silent")
+    local SilentSection = Silent:NewSection("Silent")
+
+
+    SilentSection:NewButton("TBot", "KeyBind = x", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/Cs5X9zH9'))()
+    end)
+
+    SilentSection:NewButton("NormalSilent", "KeyBind = x", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/x5A9Jvqi'))()
+    end)
+
+    SilentSection:NewButton("NoJumpBot", "KeyBind = x", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/bgigL6pZ'))()
+    end)
+
+    SilentSection:NewButton("BounceBot", "KeyBind = x", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/7PU7Sm4Z'))()
+    end)
+    
+
+    -- wtv tbr
+    local Player = Window:NewTab("Player")
+    local PlayerSection = Player:NewSection("Player")
+
+
+    PlayerSection:NewSlider("Walkspeed", "@uzmaji made ts btw", 500, 16, function(s)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+    PlayerSection:NewSlider("Jumppower", "nigga", 350, 50, function(s)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+    PlayerSection:NewButton("Reset WS/JP", "Resets to all defaults", function()
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end)
+    
+    PlayerSection:NewButton("Admin GUI", "Admin", function()
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua'))()
+    end)
+    
+    PlayerSection:NewButton("AutoGaurd", "KeyBind = z", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/BPmqd5G5'))()
+    end)
+    
+    PlayerSection:NewButton("Infinite Jumps", "Gives you Infinite Jumps", function()    
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+        if InfiniteJumpEnabled then
+            game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+        end
+        end)
+ 
+        end)
+        
+    PlayerSection:NewButton("ball mag (R)", "self explanatory", function()
+        local UIS = game:GetService('UserInputService')
+        local plr = game.Players.LocalPlayer
+        local Char = plr.Character or plr.CharacterAded:Wait()
+        local Key = 'R'
+        UIS.InputBegan:Connect(function(Input, IsTyping)
+        if IsTyping then return end
+        local KeyPressed = Input.KeyCode
+        if KeyPressed == Enum.KeyCode[Key] then
+        game.Workspace.Map.Basketball.Handle.CFrame = Game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+        end)
+    end)
+    
+    --Other
+    local Other = Window:NewTab("Other")
+    local OtherSection = Other:NewSection("Other")
+
+    OtherSection:NewButton("Chat Spoofer", "Lets you chat for other people", function()
+        loadstring(game:HttpGet(('https://pastebin.com/raw/djBfk8Li'),true))()
+    end)
+
+    OtherSection:NewButton("RTX", "nice graphics/keybind P", function()
+        loadstring(game:HttpGet(('https://pastebin.com/raw/Cd76B8Lh'),true))()
+    end)
+
+    OtherSection:NewButton("Fling (Y)", "flings everyone", function()
+        -- made by tux & kron you skids
+-- keybind is y, fling whoever has the ball
+local Player = game:GetService("Players").LocalPlayer
+local UIS = game:GetService("UserInputService")
+
+local OldPosition = Vector3.zero
+local Toggled = false
+
+local GetTarget = function()
+    local Distance, Target = 9e9;
+    
+    for _, TempPlayer in next, game:GetService("Players"):GetPlayers() do
+        if TempPlayer ~= Player and TempPlayer.Character ~= nil and TempPlayer.Character:FindFirstChild("Basketball") ~= nil then
+            local Magnitude = (TempPlayer.Character.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude
+            
+            if Distance > Magnitude then
+                Distance = Magnitude
+                Target = TempPlayer
+            end
+        end
+    end
+    
+    return Target
+end
+
+local GetRoot = function()
+    return Player.Character:FindFirstChild("HumanoidRootPart", true)
+end
+
+UIS.InputBegan:Connect(function(Key, GPE)
+    if not GPE and Key.KeyCode == Enum.KeyCode.Y and not Toggled then
+        local RootPart = GetRoot()
+        
+        Toggled = true
+        
+        OldPosition = RootPart.Position
+        
+        while Toggled do
+            local Target = GetTarget()
+            
+            if Target ~= nil then
+                local Direction = (Target.Character.Basketball.Handle.Position - RootPart.Position).Unit * 100
+
+                RootPart.Velocity = Direction * 5
+            end
+            
+            task.wait()
+        end
+    end
+end)
+
+UIS.InputEnded:Connect(function(Key, GPE)
+    if not GPE and Key.KeyCode == Enum.KeyCode.Y then
+        local RootPart = GetRoot()
+        
+        Toggled = false
+        
+        Player.Character:MoveTo(OldPosition)
+        
+        for _ = 0, 10 do
+            RootPart.CFrame = CFrame.new(OldPosition)
+            RootPart.Velocity = Vector3.zero
+            task.wait(0.1)
+        end
+    end
+end)
+    end)
+    
+    -- Teleportation
+        local Teleportation = Window:NewTab("Teleportation")
+        local TeleportationSection = Teleportation:NewSection("Teleportation")
+ 
+        TeleportationSection:NewButton("RimTp1", "Tps you to a certain rim", function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9935493, 42.9078331, 143.324341, -1, 0, 0, 0, 1, 0, 0, 0, -1) 
+        end)
+ 
+        TeleportationSection:NewButton("RimTp2", "Tps you to a certain rim", function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9944324, 42.6078377, -46.1025467, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end)
+ 
+        TeleportationSection:NewButton("BallSpawn1", "Tps you to a Ball Spawner", function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.9139996, 27.8899994, -32.2940369, -1.1920929e-07, -0, -1.00000012, 0, 1, -0, 1.00000012, 0, -1.1920929e-07)
+        end)
+ 
+        TeleportationSection:NewButton("BallSpawn2", "Tps you to a Ball Spawner", function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-17.0290585, 27.8799992, 128.626984, -1.1920929e-07, 0, 1.00000012, 0, 1, 0, -1.00000012, 0, -1.1920929e-07)
+        end)
+    
+
+    
+    -- Credits
+
+
+    local Credits = Window:NewTab("Credits")
+    local CreditsSection = Credits:NewSection("Credits")
+
+
+    CreditsSection:NewLabel("Created/scripted by @uzmaji ( ͜ₒ ㅅ ͜ ₒ)")
+    CreditsSection:NewLabel("BounceSilent: 6zyc")
+    CreditsSection:NewLabel("NoJumpBot & TBot: M_gnet")

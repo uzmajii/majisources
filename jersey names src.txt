@@ -1,0 +1,38 @@
+-- Replace these variables with the actual paths to the part and folder
+local part = game:GetService("Workspace").Stadium.Part
+local folder = part:FindFirstChild("FolderService") and part.FolderService:FindFirstChild("Communications")
+
+if folder then
+    -- Retrieve the RemoteEvent at the specified index
+    local specificRemoteEvent = folder:FindFirstChildOfClass("RemoteEvent")
+
+    if specificRemoteEvent then
+        print("Found the specific RemoteEvent:", specificRemoteEvent.Name)
+
+        -- List of jersey names
+        local jerseyNames = {
+            "@uzmaji",
+            "little kid",
+            "runs you",
+            -- Add more jersey names here if needed
+        }
+
+        while true do
+            -- Iterate over each name in the list and fire the RemoteEvent
+            for _, name in ipairs(jerseyNames) do
+                local args = {
+                    [1] = "Jersey Name",
+                    [2] = name
+                }
+                specificRemoteEvent:FireServer(unpack(args))
+                wait(0.5)-- for 0.01 seconds before the next iteration
+            end
+        end
+
+        print("Fired the RemoteEvent with jersey names.")
+    else
+        warn("Specific RemoteEvent not found.")
+    end
+else
+    warn("Folder or part not found.")
+end

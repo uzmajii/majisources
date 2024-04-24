@@ -1,0 +1,30 @@
+local part = game:GetService("Workspace").Stadium.Part
+local folder = part:FindFirstChild("FolderService") and part.FolderService:FindFirstChild("Communications")
+
+if folder then
+    
+    local specificRemoteEvent = folder:FindFirstChildOfClass("RemoteEvent")
+
+    if specificRemoteEvent then
+        print("Found the specific RemoteEvent:", specificRemoteEvent.Name)
+
+        
+         local i = 1
+
+        -- loopey
+        while true do
+            -- Fire the RemoteEvent with the argument "Jersey Number" set to the current value of i
+            specificRemoteEvent:FireServer("Jersey Number", i)
+
+            -- Increment the counter
+            i = i % 99 + 1  -- Reset to 1 after reaching 99
+
+           -- adjust time
+            wait(0.01)
+        end
+    else
+        warn("Specific RemoteEvent not found.")
+    end
+else
+    warn("Folder or part not found.")
+end
